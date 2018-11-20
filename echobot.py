@@ -54,7 +54,7 @@ def echo_all(updates):
             send_message(text, chat)
         else:
             chat = update["message"]["chat"]["id"]
-            text = "Só consigo responder texto :("
+            text = "Por enquanto consigo responder somente texto :)"
             send_message(text, chat)
 
 def main():
