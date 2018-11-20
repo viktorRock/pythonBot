@@ -46,16 +46,24 @@ def send_message(text, chat_id):
     url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
     get_url(url)
 
+def sendDefErrorMsg(update):
+    chat = update["message"]["chat"]["id"]
+    text = "Por enquanto consigo responder somente texto :)"
+    send_message(text, chat)
+
 def echo_all(updates):
     for update in updates["result"]:
-        if "text" in update["message"]:
-            text = update["message"]["text"]
-            chat = update["message"]["chat"]["id"]
+        if "message" in update:
+            message = update["message"]
+        elif "edited_message" in update:
+            message = update["edited_message"]
+
+        if "text" in message:
+            text = message["text"]
+            chat = message["chat"]["id"]
             send_message(text, chat)
         else:
-            chat = update["message"]["chat"]["id"]
-            text = "Por enquanto consigo responder somente texto :)"
-            send_message(text, chat)
+            sendDefErrorMsg(update)
 
 def main():
     last_update_id = None
