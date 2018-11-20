@@ -48,9 +48,14 @@ def send_message(text, chat_id):
 
 def echo_all(updates):
     for update in updates["result"]:
-        text = update["message"]["text"]
-        chat = update["message"]["chat"]["id"]
-        send_message(text, chat)
+        if "text" in update["message"]:
+            text = update["message"]["text"]
+            chat = update["message"]["chat"]["id"]
+            send_message(text, chat)
+        else:
+            chat = update["message"]["chat"]["id"]
+            text = "Só consigo responder texto :("
+            send_message(text, chat)
 
 def main():
     last_update_id = None
