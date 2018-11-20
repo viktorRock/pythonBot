@@ -4,7 +4,7 @@ import os
 import urllib
 import time
 
-TOKEN = os.environ['TELELEGRAM_BOT_TOKEN']
+TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
 
 def get_url(url):
