@@ -18,7 +18,6 @@ def get_json_from_url(url):
     js = json.loads(content)
     return js
 
-
 def get_updates(offset=None):
     url = URL + "getUpdates"
     if offset:
@@ -38,7 +37,6 @@ def get_last_chat_id_and_text(updates):
     text = updates["result"][last_update]["message"]["text"]
     chat_id = updates["result"][last_update]["message"]["chat"]["id"]
     return (text, chat_id)
-
 
 def send_message(text, chat_id):
     if sys.version_info[0] < 3:
@@ -62,7 +60,6 @@ def main():
             last_update_id = get_last_update_id(updates) + 1
             echo_all(updates)
         time.sleep(0.5)
-
 
 if __name__ == '__main__':
     main()
