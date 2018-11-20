@@ -3,6 +3,7 @@ import requests
 import os
 import urllib
 import time
+import sys
 
 TOKEN = os.environ['TELEGRAM_BOT_TOKEN']
 URL = "https://api.telegram.org/bot{}/".format(TOKEN)
@@ -40,7 +41,10 @@ def get_last_chat_id_and_text(updates):
 
 
 def send_message(text, chat_id):
-    text = urllib.parse.quote_plus(text)
+    if sys.version_info[0] < 3:
+        text = urllib.quote_plus(text)
+    else:
+        text = urllib.parse.quote_plus(text)
     url = URL + "sendMessage?text={}&chat_id={}".format(text, chat_id)
     get_url(url)
 
